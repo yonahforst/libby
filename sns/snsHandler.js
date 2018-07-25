@@ -1,5 +1,7 @@
 const reqContext = require('./_requestContext')
-const snsHandler = func => async records => {
+const parse = require('./parse')
+
+module.exports = func => async records => {
   const parsed = parse(records)
   
   for (let record of parsed) {

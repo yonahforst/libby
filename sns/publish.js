@@ -1,23 +1,25 @@
-'use strict';
+const AWS = require('aws-sdk')
+const requestContext = require('./_requestContext')
+const sns = new AWS.SNS()
 
-var AWS =require('aws-sdk')
+module.exports = async (topic, message) => {
+  const { TopicArn } = await sns.createTopic({ Name: topic }).promise()
+  const params = {
+    TopicArn,
+    Subject: topic,
+    Message: JSON.stringify(message),
+    MessageAttributes: {}
+  }
 
-const publish = (topic, message) => {
-  var sns = new AWS.SNS()
-
-  return sns.createTopic({
-      Name: topic
-    }).promise()
-    .then(res => {
-      var params = {
-        TopicArn: res.TopicArn,
-        Subject: topic,
-        Message: JSON.stringify(message),
+  if (requestContext) {
+    const context = requestContext.get()
+    for (let key in context) {
+      params.MessageAttributes[key] = {
+        DataType: 'String',
+        StringValue: context[key]
       }
+    }
+  }
 
-      return sns.publish(params).promise()
-    })
+  return await sns.publish(params).promise()
 }
-
-module.exports = publish
-

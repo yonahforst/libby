@@ -1,10 +1,10 @@
-const log = require('./log')
+let log = require('./_log')
 
 let requestContext
 
 try {
   requestContext = require('libby.reqcontext')
-} catch {
+} catch (e) {
   log.debug('requestContext not available') 
 }
 

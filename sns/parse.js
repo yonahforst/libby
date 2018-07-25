@@ -1,4 +1,4 @@
-const parse = records => {
+module.exports = records => {
   return records.map(({ Sns }) => {
     let context = {}
 
