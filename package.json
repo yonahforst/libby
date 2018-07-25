@@ -1,0 +1,20 @@
+{
+  "name": "libby",
+  "version": "1.0.0",
+  "description": "A modularized utility library for working with serverless functions on AWS",
+  "main": "index.js",
+  "scripts": {
+    "test": "\"tap \\\"{,!(node_modules)/**/__test__/}*.js\\\"\""
+  },
+  "keywords": [
+    "sls",
+    "lambda",
+    "utility",
+    "util",
+    "library",
+    "helper",
+    "serverless"
+  ],
+  "author": "Yonah Forst",
+  "license": "ISC"
+}
