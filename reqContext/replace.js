@@ -1,3 +1,6 @@
+// replace the entire context with a new object
+// use 'set' so that keys are prefixed correctly
+
 const clear = require('./clear')
 const set = require('./set')
 
