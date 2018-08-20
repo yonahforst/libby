@@ -2,7 +2,9 @@ const requestContext = require('./_requestContext')
 const log = require('./_log')
 
 const AWS = require('aws-sdk')
-const lambda = new AWS.Lambda()
+const lambda = new AWS.Lambda({
+  region: 'eu-west-1'
+});
 
 module.exports = FunctionName => async payload => {
   const params = {
