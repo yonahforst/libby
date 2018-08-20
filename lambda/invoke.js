@@ -1,7 +1,10 @@
 const requestContext = require('./_requestContext')
 const log = require('./_log')
 
-const AWS = require('aws-sdk')
+const AWSXRay = require('aws-xray-sdk-core')
+const AWS = process.env.LAMBDA_RUNTIME_DIR
+  ? AWSXRay.captureAWS(require('aws-sdk'))
+  : require('aws-sdk')
 const lambda = new AWS.Lambda({
   region: 'eu-west-1'
 });

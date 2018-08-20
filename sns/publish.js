@@ -1,4 +1,7 @@
-const AWS = require('aws-sdk')
+const AWSXRay = require('aws-xray-sdk-core')
+const AWS = process.env.LAMBDA_RUNTIME_DIR
+  ? AWSXRay.captureAWS(require('aws-sdk'))
+  : require('aws-sdk')
 const requestContext = require('./_requestContext')
 const sns = new AWS.SNS()
 
