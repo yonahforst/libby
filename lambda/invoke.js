@@ -35,9 +35,14 @@ module.exports = FunctionName => async payload => {
   const parsed = JSON.parse(res.Payload)
 
   // we need to check for function errors here, since lambda INVOKE will return 200
-  if (parsed.errorMessage) {
+  if (parsed && parsed.errorMessage) {
     throw parsed.errorMessage
   }
+
+  if (parsed == null) {
+    log.warn('Function payload is null', res);
+  }
+  
 
   return parsed
 }
