@@ -3,6 +3,7 @@ const log = require('./_log')
 const AWS = require('../aws')
 
 const lambda = new AWS.Lambda({
+  region: 'eu-west-1',
   endpoint: process.env.LOCALSTACK_HOSTNAME 
     ? `http://${process.env.LOCALSTACK_HOSTNAME}:4574` 
     : undefined,
@@ -37,9 +38,14 @@ module.exports = FunctionName => async payload => {
   const parsed = JSON.parse(res.Payload)
 
   // we need to check for function errors here, since lambda INVOKE will return 200
-  if (parsed.errorMessage) {
+  if (parsed && parsed.errorMessage) {
     throw parsed.errorMessage
   }
+
+  if (parsed == null) {
+    log.warn('Function payload is null', res);
+  }
+  
 
   return parsed
 }

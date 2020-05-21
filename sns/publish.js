@@ -2,6 +2,7 @@ const AWS = require('../aws')
 const requestContext = require('./_requestContext')
 
 const sns = new AWS.SNS({
+  region: 'eu-west-1',
   endpoint: process.env.LOCALSTACK_HOSTNAME 
     ? `http://${process.env.LOCALSTACK_HOSTNAME}:4575` 
     : undefined,
