@@ -1,8 +1,12 @@
 const requestContext = require('./_requestContext')
 const log = require('./_log')
+const AWS = require('../aws')
 
-const AWS = require('aws-sdk')
-const lambda = new AWS.Lambda()
+const lambda = new AWS.Lambda({
+  endpoint: process.env.LOCALSTACK_HOSTNAME 
+    ? `http://${process.env.LOCALSTACK_HOSTNAME}:4574` 
+    : undefined,
+})
 
 module.exports = FunctionName => async payload => {
   const params = {

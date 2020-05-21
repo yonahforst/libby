@@ -1,6 +1,11 @@
-const AWS = require('aws-sdk')
+const AWS = require('../aws')
 const requestContext = require('./_requestContext')
-const sns = new AWS.SNS()
+
+const sns = new AWS.SNS({
+  endpoint: process.env.LOCALSTACK_HOSTNAME 
+    ? `http://${process.env.LOCALSTACK_HOSTNAME}:4575` 
+    : undefined,
+})
 
 module.exports = async (topic, message) => {
   // this is a cheat to lookup the topic ARN. 
