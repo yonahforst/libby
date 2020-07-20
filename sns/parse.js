@@ -4,7 +4,7 @@ module.exports = records => {
 
     // try to load any context from MessageAttributes
     for (let key in Sns.MessageAttributes) {
-      context[key] = Sns.MessageAttributes[key].StringValue
+      context[key] = Sns.MessageAttributes[key].Value
     }
 
     return {
