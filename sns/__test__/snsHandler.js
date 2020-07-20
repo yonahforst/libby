@@ -12,7 +12,7 @@ test('snsHandler', async assert => {
   const snsHandler = proxyquire('../snsHandler', {
     ...defaultStubs,
     './_requestContext': {
-      replaceAllWith: params => context = params
+      replace: params => context = params
     }
   })
 
@@ -21,7 +21,7 @@ test('snsHandler', async assert => {
     return Promise.resolve()
   }
 
-  const records = [{
+  const Records = [{
     context: {
       foo: 'bar',
     },
@@ -30,7 +30,7 @@ test('snsHandler', async assert => {
     }
   }]
 
-  await snsHandler(func)(records)
+  await snsHandler(func)({ Records })
   
   assert.deepEquals(context, { foo: 'bar' }, 'sets context')
   assert.deepEquals(event, { bar: 'baz' }, 'sends event to function')
