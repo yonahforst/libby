@@ -1,8 +1,9 @@
 const reqContext = require('./_requestContext')
 const parse = require('./parse')
 
-module.exports = func => async ({ Records }) => {
-  const parsed = parse(Records)
+module.exports = func => async (params) => {
+  const records = params.Records ? params.Records : params
+  const parsed = parse(records)
   
   for (let record of parsed) {
     if (reqContext)
