@@ -41,6 +41,11 @@ function log(level, message, params) {
     context = requestContext.get()
   }
 
+  // accept string messages
+  if (typeof message == 'string') {
+    message = { message }
+  }
+
   // default to DEBUG
   const levelSet = context.logLevel || process.env.logLevel || 'INFO'
 
