@@ -16,12 +16,9 @@ module.exports = FunctionName => async payload => {
   }
 
   // load any context and pass it along.
-  // the context needs to be nested under a 'custom' parameter,
-  // and sent as a base64 encoded string
+  // the context needs to be sent as a base64 encoded string
   if (requestContext) {
-    const context = { 
-      custom: requestContext.get(),
-    }
+    const context = requestContext.get()
 
     // stringify and convert to base64
     params.ClientContext = Buffer.from(JSON.stringify(context)).toString('base64')
