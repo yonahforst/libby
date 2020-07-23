@@ -1,6 +1,6 @@
 {
   "name": "libby",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A modularized utility library for working with serverless functions on AWS",
   "main": "index.js",
   "scripts": {
