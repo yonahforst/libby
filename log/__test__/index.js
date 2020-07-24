@@ -19,7 +19,9 @@ test('index', assert => {
       logLevel: 'INFO',
       foo: 'bar',
       message: 'hi',
-      bar: 'baz',
+      params: {
+        bar: 'baz',
+      },
       awsRegion: null,
       functionMemorySize: null,
       functionName: null,
@@ -40,8 +42,11 @@ test('index', assert => {
       logLevel: 'INFO',
       foo: 'bar',
       message: 'hi',
-      bar: 'baz',
+      params: {
+        bar: 'baz',
+      },
       awsRegion: null,
+      error: undefined,
       functionMemorySize: null,
       functionName: null,
       stage: null,
@@ -56,14 +61,18 @@ test('index', assert => {
       logLevel: 'INFO',
       foo: 'bar',
       message: 'hi',
-      bar: 'baz',
+      params: {
+        bar: 'baz',
+      },
       awsRegion: null,
       functionMemorySize: null,
       functionName: null,
       stage: null,
-      errorName: 'someName',
-      errorMessage: 'someMessage',
-      stackTrace: 'someStack',
+      error: {
+        name: 'someName',
+        message: 'someMessage',
+        stack: 'someStack',
+      }
     },
     'parses and logs errors'
   )

@@ -5,7 +5,7 @@ const requestContext = require('./_requestContext')
 
 // most of these are available through the Node.js execution environment for Lambda
 // see https://docs.aws.amazon.com/lambda/latest/dg/current-supported-versions.html
-const DEFAULT_PARAMS = {
+const DEFAULT_CONTEXT = {
   awsRegion: process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION,
   functionName: process.env.AWS_LAMBDA_FUNCTION_NAME,
   functionMemorySize: process.env.AWS_LAMBDA_FUNCTION_MEMORY_SIZE,
@@ -19,16 +19,16 @@ const LOG_LEVELS = {
   ERROR: 3
 }
 
-function appendError(params={}, error) {
+function formatError(error) {
   if (!error) {
-    return params
+    return undefined
   }
 
+  // need to extract these properties explicitly
   return {
-    ...params,
-    errorName: error.name,
-    errorMessage: error.message,
-    stackTrace: error.stack
+    name: error.name,
+    message: error.message,
+    stack: error.stack,
   }
 }
 
@@ -51,7 +51,7 @@ function log(level, message, params) {
   }
 
   let logMsg = {
-    ...DEFAULT_PARAMS,
+    ...DEFAULT_CONTEXT,
     ...context,
     ...params,
     level,
@@ -65,8 +65,8 @@ function log(level, message, params) {
 }
 
 module.exports = {
-  debug: (msg, params) => log('DEBUG', msg, params),
-  info: (msg, params) => log('INFO',  msg, params),
-  warn: (msg, params, error) => log('WARN',  msg, appendError(params, error)),
-  error: (msg, params, error) => log('ERROR', msg, appendError(params, error)),
+  debug: (msg, params) => log('DEBUG', msg, { params }),
+  info: (msg, params) => log('INFO',  msg, { params }),
+  warn: (msg, params, error) => log('WARN',  msg, { params, error: formatError(error) }),
+  error: (msg, params, error) => log('ERROR', msg,  { params, error: formatError(error) }),
 }
