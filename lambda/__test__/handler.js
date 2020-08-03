@@ -7,6 +7,9 @@ test('handler', async assert => {
   const handler = proxyquire('../handler', {
     './_requestContext': {
       replace: params => context = params,
+    },
+    './_base64': {
+      decode: obj => ({ decoded: obj }),
     }
   })
 
@@ -21,6 +24,6 @@ test('handler', async assert => {
     }
   )
 
-  assert.deepEquals(context, { foo: 'bar' }, 'sets context from clientContext')
+  assert.deepEquals(context, { decoded: { foo: 'bar' }}, 'sets context from clientContext')
   assert.deepEquals(res, { some: 'event' }, 'sends event to function')
 })
