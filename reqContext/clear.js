@@ -1,2 +1,2 @@
 // clear the current context
-module.exports = () => global.CONTEXT = undefined
+module.exports = () => global.LIBBY_CONTEXT = undefined

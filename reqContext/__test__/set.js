@@ -3,26 +3,26 @@ const { test } = require('tap')
 const set = require('../set')
 
 test('set', assert => {
-  global.CONTEXT = undefined
+  global.LIBBY_CONTEXT = undefined
 
-  const expected = { 'x-correlation-foo': 'bar' }
+  const expected = { 'x-libby-foo': 'bar' }
 
   set('foo', 'bar')
 
-  assert.deepEquals(global.CONTEXT, expected, 'sets context with key prefix')
+  assert.deepEquals(global.LIBBY_CONTEXT, expected, 'sets context with key prefix')
   assert.end()
 })
 
 test('set - with prefix', assert => {
-  global.CONTEXT = { 'x-correlation-foo': 'bar' }
+  global.LIBBY_CONTEXT = { 'x-libby-foo': 'bar' }
   
   const expected = { 
-    'x-correlation-foo': 'bar',
-    'x-correlation-bar': 'foo',
+    'x-libby-foo': 'bar',
+    'x-libby-bar': 'foo',
   }
 
-  set('x-correlation-bar', 'foo')
+  set('x-libby-bar', 'foo')
 
-  assert.deepEquals(global.CONTEXT, expected, 'does not add prefix if it already exists')
+  assert.deepEquals(global.LIBBY_CONTEXT, expected, 'does not add prefix if it already exists')
   assert.end()
 })

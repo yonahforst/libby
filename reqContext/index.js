@@ -1,6 +1,6 @@
 // taken from here:
 // https://theburningmonk.com/2017/09/capture-and-forward-correlation-ids-through-different-lambda-event-sources/
-// basically, we're using a global variable called 'CONTEXT' share correlation ids between various libraries
+// basically, we're using a global variable called 'LIBBY_CONTEXT' share correlation ids between various libraries
 // e.g. 
 // 1 - the SNS lib sets the correlation id from an inbound request.
 // 2 - the LOG lib adds that correlation id to all log messages
