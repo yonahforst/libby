@@ -24,22 +24,7 @@ test('invoke', async assert => {
   const expected = {
     FunctionName: 'someFunction',
     Payload: '{"bar":"baz"}',
-    ClientContext: Buffer.from('{"custom":{"foo":"bar"}}').toString('base64')
-  }
-
-  const res = await invoke('someFunction')({ bar: 'baz' })
-
-  assert.deepEquals(res, expected, 'forwards to invoke')
-})
-
-test('invoke - without context', async assert => {
-
-  const invoke = require('../invoke')
-  
-  const expected = {
-    FunctionName: 'someFunction',
-    Payload: '{"bar":"baz"}',
-    ClientContext: Buffer.from('{"custom":{}}').toString('base64')
+    ClientContext: Buffer.from('{"foo":"bar"}').toString('base64')
   }
 
   const res = await invoke('someFunction')({ bar: 'baz' })

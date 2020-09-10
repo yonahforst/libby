@@ -6,7 +6,7 @@ test('parse', assert => {
     Sns: {
       MessageAttributes: {
         foo: {
-          StringValue: 'bar',
+          Value: 'bar',
         }
       },
       Message: '{"bar":"baz"}'
