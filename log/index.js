@@ -41,7 +41,7 @@ function log(level, message, params) {
     context = requestContext.get()
   }
 
-  // default to DEBUG
+  // default to INFO
   const levelSet = context.logLevel || process.env.logLevel || 'INFO'
 
   // only log if the level is greater than what is set in context
