@@ -17,7 +17,7 @@ function cancelArn(executionArn) {
 }
 
 module.exports = (arn, externalId) => {
-  log.info('cancelExecution', { arn, externalId });
+  log.debug('libby/stepFunction startExecution', { arn, externalId })
 
   const params = {
     stateMachineArn: arn,

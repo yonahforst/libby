@@ -25,7 +25,11 @@ module.exports = FunctionName => async payload => {
     log.debug('lambda.invoke: set outbound ClientContext from requestContext')
   }
 
+  log.debug('libby/lambda invoke', { FunctionName, payload })
+
   const res = await lambda.invoke(params).promise()
+
+  log.debug('libby/lambda response', res)
 
   // this only check that the lambda invocation was successfull.
   if (res.StatusCode !== 200 && res.StatusCode !== 201) {
@@ -40,7 +44,7 @@ module.exports = FunctionName => async payload => {
   }
 
   if (parsed == null) {
-    log.warn('Function payload is null', res);
+    log.warn('libby/lambda response payload was null', res);
   }
   
 

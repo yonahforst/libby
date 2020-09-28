@@ -10,8 +10,8 @@ const stepfunctions = new AWS.StepFunctions({
 })
 
 module.exports = (arn, externalId, payload) => {
-  log.info('startExecution', { arn, externalId, payload });
-  
+  log.debug('libby/stepFunction startExecution', { arn, externalId, payload })
+
   const __context = requestContext ? requestContext.get() : {}
   
   const now = new Date().getTime();

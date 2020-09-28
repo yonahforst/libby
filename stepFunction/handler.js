@@ -10,5 +10,7 @@ module.exports = func => ({
     log.debug('stepFunction.handler: set requestContext from __context parameter')
   }
 
+  log.debug('libby/stepFunction handler', event)
+
   return func(event)
 }
