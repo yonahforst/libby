@@ -1,3 +1,4 @@
+const reqContext = require('../reqContext')
 // copied from here:
 // https://theburningmonk.com/2017/09/capture-and-forward-correlation-ids-through-different-lambda-event-sources/
 
@@ -39,10 +40,16 @@ function log(level, message, params) {
   // try to load the context
   if (requestContext) {
     context = requestContext.get()
+    console.log('got context', context)
+    // set the log level from the env and update the context
+    if (!context.logLevel) {
+      context.logLevel = process.env.logLevel
+      reqContext.replace(context)
+    }
   }
 
   // default to INFO
-  const levelSet = context.logLevel || process.env.logLevel || 'INFO'
+  const levelSet = context.logLevel || 'INFO'
 
   // only log if the level is greater than what is set in context
   // i.e. dont log debug events if the level is set to warn
