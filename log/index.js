@@ -40,9 +40,9 @@ function log(level, message, params) {
   // try to load the context
   if (requestContext) {
     context = requestContext.get()
-    console.log('got context', context)
+    
     // set the log level from the env and update the context
-    if (!context.logLevel) {
+    if (!context.logLevel && process.env.logLevel) {
       context.logLevel = process.env.logLevel
       reqContext.replace(context)
     }
