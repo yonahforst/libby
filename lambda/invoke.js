@@ -5,7 +5,7 @@ const AWS = require('../aws')
 const lambda = new AWS.Lambda({
   region: 'eu-west-1',
   endpoint: process.env.LOCALSTACK_HOSTNAME 
-    ? `http://${process.env.LOCALSTACK_HOSTNAME}:4574` 
+    ? `http://${process.env.LOCALSTACK_HOSTNAME}:4566` 
     : undefined,
 })
 

@@ -4,7 +4,7 @@ const AWS = require('../aws')
 const stepfunctions = new AWS.StepFunctions({
   region: 'eu-west-1',
   endpoint: process.env.LOCALSTACK_HOSTNAME 
-    ? `http://${process.env.LOCALSTACK_HOSTNAME}:4585`
+    ? `http://${process.env.LOCALSTACK_HOSTNAME}:4566`
     : undefined,
 })
 
