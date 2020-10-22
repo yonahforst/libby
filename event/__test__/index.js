@@ -36,3 +36,17 @@ test('Cannot create an EventFactory without a service name', assert => {
 
   assert.end()
 })
+
+test('Cannot create an anemic domain event (no data) ', assert => {
+
+  const producerName = 'testService'
+  const testEventFactory = new EventFactory(producerName);
+
+  
+  try{
+    firstEvent = testEventFactory.create('1234', 'test_event', {})
+  } catch(err){
+    assert.equal(err.message, 'typeof attributes must be object and must contain data!' )
+  }
+  assert.end()
+})

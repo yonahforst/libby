@@ -17,8 +17,8 @@ class EventFactory{
   }
 
   create(event_id, event_type, attributes, metadata){
-    if(typeof attributes != 'object'){
-      throw Error ('typeof attributes must be object')
+    if(typeof attributes != 'object' || Object.keys(attributes).length === 0){
+      throw Error ('typeof attributes must be object and must contain data!')
     }
     const meta = {
       ...metadata,
